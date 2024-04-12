@@ -1,0 +1,49 @@
+.container-delete {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.delete-confirm {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.delete-confirm h2 {
+    margin-bottom: 10px;
+    color: #dc3545; /* Red color for title */
+}
+
+.delete-confirm p {
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Red color for "Yes" button */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Gray color for "No" button */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-danger:hover,
+.btn-secondary:hover {
+    opacity: 0.8;
+}

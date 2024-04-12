@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+
+{% if request.user.status == 'Teacher' %}
+<nav class="nav">
+    <i class="uil uil-bars navOpenBtn"></i>
+    <a href="#" class="logo">StudentsHub</a>
+
+    <ul class="nav-links">
+      <i class="uil uil-times navCloseBtn"></i>
+      <li><a href="{% url 'book_list' %}">List of Book</a></li>
+      <li><a href="{% url 'create_book' %}">Create Book</a></li>
+    </ul>
+
+    <i class="uil uil-search search-icon" id="searchIcon"></i>
+    <div class="search-box">
+    <form action="{% url 'search' %}" method="get" >
+      <i class="uil uil-search search-icon"></i>
+      <input type="search" name="q" placeholder="Search here..." />
+    
+    </form>
+    </div>
+    
+  </nav>
+  {% endif %}
+<div class="container">
+    <h2 class="text-center">Список книг</h2>
+    <div class="row">
+        {% for book in page_obj %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ book.Image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">{{ book.description|slice:":80"|add:"..." }}</p>
+                    <a href="{% url 'book_detail' book.id %}" class="btn">Read more</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center display-6">Sorry, no books in this list.</p>
+    
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">&lt;&lt;</a>
+        {% endif %}
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">&gt;&gt;</a>
+        {% endif %}
+    
+    </div>
+</div>
+
+<script src="{% static 'js/navbar.js' %}"></script>
+{% endblock%}

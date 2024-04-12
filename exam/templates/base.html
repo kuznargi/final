@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link rel="stylesheet" href="{% static 'css/book.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/deleltepage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+   
+    <title>Students Hub</title>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+          <i class="bx bxl-c-plus-plus icon"></i>
+          <div class="logo_name">Students Hub</div>
+          <i class="bx bx-menu" id="btn"></i>
+        </div>
+        <ul class="nav-list">
+          <li>
+            <a href="{% url 'homework_list' %}">
+              <i class='bx bx-pencil'></i>
+              <span class="links_name">Home Work</span>
+            </a>
+            <span class="tooltip">Home Work</span>
+          </li>
+          <li>
+            <a href="{% url 'profile' %}">
+              <i class='bx bx-user'></i>
+              <span class="links_name">Profile</span>
+            </a>
+            <span class="tooltip">Profile</span>
+          </li>
+          <li>
+            <a href="{% url 'book_list' %}">
+                <i class='bx bx-book-open'></i>
+              <span class="links_name">Book</span>
+            </a>
+            <span class="tooltip">Book</span>
+          </li>
+          <li>
+            <a href="{% url 'index' %}">
+              <i class="bx bx-grid-alt"></i>
+              <span class="links_name">Achievement</span>
+            </a>
+            <span class="tooltip">Achievement</span>
+          </li>
+          {%  if request.user.status == 'Student'  %}
+          <li>
+            <a href="{% url 'mark' %}">
+              <i class='bx bx-star'></i>
+              <span class="links_name">Grade</span>
+            </a>
+            <span class="tooltip">Grade</span>
+          </li>
+          {% endif %}
+          <li>
+            <a href="{% url 'exam' %}">
+              <i class="bx bx-folder"></i>
+              <span class="links_name">Exams</span>
+            </a>
+            <span class="tooltip"></span>
+          </li>
+          
+
+          <li>
+            <a href="{% url 'schedule' %}">
+              <i class='bx bx-table'></i>
+              <span class="links_name">Schedule</span>
+            </a>
+            <span class="tooltip">Schedule</span>
+          </li>
+          <li class="profile">
+            {% if request.user.is_authenticated %}
+            <div class="profile-details">
+              <img src="{{ request.user.Image.url }}" alt="profileImg" />
+              <div class="name_job">
+                <div class="name">{{request.user.username}} {{request.user.last_name}}</div>
+                <div class="job">{{request.user.status}}</div>
+              </div>
+            </div>
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="button-with-image">
+                <i class="bx bx-log-out" id="log_out"></i>
+              </button>
+            </form>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+      <section class="home-section">
+       {% block content %}
+       {% endblock %}
+      </section>
+    
+      <script src="{% static 'js/sidebar.js' %}"></script>
+</body>
+</html>

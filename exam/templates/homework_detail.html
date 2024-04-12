@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+
+{% block content %}
+
+<div class="container book-container">
+    <div class="row">
+        <div class="col">
+            <img src="{{ homework.Image.url }}" alt="{{ homework.Title }}" class="book-image">
+        </div>
+        <div class="col book-details">
+            <h1 class="book-title">{{ homework.Title}}</h1>
+            <p class="book-description">{{ homework.Description }}</p>
+            
+        </div>
+    </div>
+    
+    {% if request.user.status == 'Teacher' %}
+    <a href="{% url 'homework_update_th' homework.id %}" class="btn btn-primary">Edit</a>
+    <a href="{% url 'homework_delete' homework.id %}" class="btn btn-primary">Delete</a>
+    {% endif %}
+    {% if request.user.status == 'Student' %}
+    <a href="{% url 'homework_update_st' homework.id %}" class="btn btn-primary">Add</a>
+    {% endif %}
+</div>
+
+
+{%endblock%}

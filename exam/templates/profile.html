@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="main">
+    {% if request.user.is_authenticated %}
+    <div class="profile-card">
+      <div class="image">
+        <img src="{{request.user.Image.url}}" alt="" class="profile-pic">
+      </div>
+      <div class="data">
+        <h2>{{request.user.last_name}} {{request.user.first_name}}</h2>
+        <span>{{request.user.status}}</span>
+      </div>
+      <div class="row">
+        <div class="info">
+          <h3>UserName:</h3>
+          <span>{{request.user.username}}</span>
+        </div>
+        <div class="info">
+          <h3>Gender</h3>
+          <span>{{request.user.gender}}</span>
+        </div>
+       
+      </div>
+      <!-- <div class="buttons">
+        <a href="#" class="btn">Message</a>
+        <a href="#" class="btn">Follow Me</a>
+      </div> -->
+    </div>
+    {% endif %}
+  </section>
+{% endblock %}
+
+

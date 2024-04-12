@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content%}
+{% if request.user.status == 'Teacher' %}
+<nav class="nav">
+    <i class="uil uil-bars navOpenBtn"></i>
+    <a href="#" class="logo">Students Hub</a>
+
+    <ul class="nav-links">
+      <i class="uil uil-times navCloseBtn"></i>
+      <li><a href="{% url 'homework_list' %}">List of HomeWork</a></li>
+      {% if request.user.status == 'Teacher' %}
+      <li><a href="{% url 'homework_create_th' %}">Create HomeWork</a></li>
+      {% elif request.user.status == 'Student' %}
+      <li><a href="{% url 'homework_create_st' %}">Create HomeWork</a></li>
+
+      {% endif %}
+    </ul>
+
+    <i class="uil uil-search search-icon" id="searchIcon"></i>
+    <div class="search-box">
+    <form action="{% url 'search1' %}" method="get" >
+      <i class="uil uil-search search-icon"></i>
+      <input type="search" name="q" placeholder="Search here..." />
+    
+    </form>
+    </div>
+    
+  </nav>
+  {% endif %}
+<div class="container">
+    <h2 class="text-center">List of Homeworks</h2>
+    <div class="row">
+        {% for homework in page_obj %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ homework.Image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ homework.Title }}</h5>
+                    <p class="card-text">{{ homework.Description|slice:":80"|add:"..." }}</p>
+                    <p >{{homework.teacher.first_name}} </p>
+                    <a href="{% url 'homework_detail' homework.id %}" class="btn">Read more</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center display-6">Sorry, no homeworks in this list.</p>
+    
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">&lt;&lt;</a>
+        {% endif %}
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">&gt;&gt;</a>
+        {% endif %}
+    
+    </div>
+</div>
+<script src="{% static 'js/navbar.js' %}"></script>
+{% endblock%}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container book-container">
+    <div class="row">
+        <div class="col">
+            <img src="{{ book.Image.url }}" alt="{{ book.title }}" class="book-image">
+        </div>
+        <div class="col book-details">
+            <h1 class="book-title">{{ book.title}}</h1>
+            <p class="book-description">{{ book.description }}</p>
+            
+        </div>
+    </div>
+    
+    {% if request.user.status == 'Teacher' %}
+    <a href="{% url 'update_book' book.id %}" class="btn btn-primary">Edit</a>
+    <a href="{% url 'delete_book' book.id %}" class="btn btn-primary">Delete</a>
+
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-delete">
+    <div class="delete-confirm">
+        <h2>Confirm Deletion</h2>
+        <p>Are you sure you want to delete?</p>
+        <div class="buttons">
+            <form  method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger" type="submit">Yes, Delete</button>
+            </form>
+            <a href="{% url 'book_list' %}" class="btn btn-secondary">No, Cancel</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
