@@ -27,7 +27,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'app.middleware.CustomMiddleware',
+    'app.middleware.CustomMiddleware',
 ]
 
 ROOT_URLCONF = 'exam.urls'
@@ -51,6 +51,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'exam.wsgi.application'
 AUTH_USER_MODEL = 'app.CustomUser'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
